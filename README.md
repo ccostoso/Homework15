@@ -1,2 +1,2 @@
-# Homework15
-Sequilized version of Homework14 repo
+# Homework14
+A burger app.
