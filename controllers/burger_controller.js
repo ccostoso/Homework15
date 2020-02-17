@@ -1,59 +1,59 @@
 const express = require('express');
 var router = express.Router();
 
-// Import the model (burger.js) to use its database functions.
-const burger = require('../models/burger.js');
+// Requiring our Todo model
+var db = require("../models");
 
 // Create all our routes and set up logic within those routes where required.
 router.get("/", function (req, res) {
-    burger.all(function (data) {
-        var hbsObject = {
-            burger: data
-        };
-        console.log(hbsObject);
-        res.render("index", hbsObject);
+    db.Burger.findAll()
+        .then(function(data) {
+            var hbsObject = {
+                burger: data
+            }
+            
+            res.render("index", hbsObject);
+
+            console.log(data);
     });
 });
 
 router.post("/api/burger", function (req, res) {
-    burger.create([
-        "burger_name", "devoured"
-    ], [
-        req.body.burger_name, req.body.devoured
-    ], function (result) {
-        // Send back the ID of the new quote
-        res.json({ id: result.insertId });
+    console.log("req.body", req.body);
+
+    db.Burger.create({
+      burger_name: req.body.burger_name,
+      devoured: false
+    }).then(function() {
+      res.send(204).end();
     });
 });
 
 router.put("/api/burger/:id", function (req, res) {
-    var condition = "id = " + req.params.id;
+    console.log("req.body", req.body);
+    console.log("req.params", req.params);
 
-    console.log("condition", condition);
-
-    burger.update({
-        devoured: req.body.devoured
-    }, condition, function (result) {
-        if (result.changedRows == 0) {
-            // If no rows were changed, then the ID must not exist, so 404
-            return res.status(404).end();
-        } else {
-            res.status(200).end();
+    db.Burger.update({
+        devoured: req.body.devoured,
+      }, {
+        where: {
+          id: req.params.id
         }
-    });
+      }).then(function() {
+        res.send(204).end();
+      })
 });
 
 router.delete("/api/burger/:id", function (req, res) {
-    var condition = "id = " + req.params.id;
+    console.log("req.params", req.params);
 
-    burger.delete(condition, function (result) {
-        if (result.affectedRows == 0) {
-            // If no rows were changed, then the ID must not exist, so 404
-            return res.status(404).end();
-        } else {
-            res.status(200).end();
+    db.Burger.destroy({
+        where: {
+          id: req.params.id
         }
-    });
+      }).then(function() {
+        res.send(204).end();
+      })
 });
 
 // Export routes for server.js to use.

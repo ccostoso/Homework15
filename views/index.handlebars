@@ -1,13 +1,14 @@
 <div class="container d-flex flex-column justify-content-center">
     <img src="/assets/img/burger.png" alt="Burger image" class="mt-4 mx-auto burger-img"> 
 
-    <h1 class="display-4 font-weight-bold text-center my-4">Eat-Da-Burger!</h2>
+    <h1 class="display-4 font-weight-bold text-center mt-4">Eat-Da-Burger!</h1>
+    <h3 class="text-center mb-4">...𝔀𝓲𝓽𝓱 𝓢𝓮𝓺𝓾𝓮𝓵𝓲𝔃𝓮</h3>
 
     <div class="row my-4">
         <ul class="list-group col-md-6 mx-auto px-4">
             <li class="list-group-item active">Uneaten Burgers</li>
             {{#each burger}}
-                {{#unless devoured}}
+                {{#unless dataValues.devoured}}
                     {{> burgers/burgers-block devoured=false}}
                 {{/unless}}
             {{/each}}
@@ -16,7 +17,7 @@
         <ul class="list-group col-md-6 mx-auto px-4">
             <li class="list-group-item active">Devoured Burgers</li>
             {{#each burger}}
-                {{#if devoured}}
+                {{#if dataValues.devoured}}
                     {{> burgers/devoured-block devoured=true}}
                 {{/if}}
             {{/each}}

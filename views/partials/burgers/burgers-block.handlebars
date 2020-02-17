@@ -1,10 +1,10 @@
 <li class="list-group-item d-flex justify-content-between">
-    {{burger_name}}
+    {{dataValues.burger_name}}
 
     <div>
-        <button class="change-devoured btn btn-danger" data-id="{{id}}" data-devoured="{{devoured}}">
+        <button class="change-devoured btn btn-danger" data-id="{{dataValues.id}}" data-devoured="{{dataValues.devoured}}">
             Eat!
         </button>
-        <button class="delete btn btn-danger" data-id="{{this.id}}">&#9746;</button>
+        <button class="delete btn btn-danger" data-id="{{this.dataValues.id}}">&#9746;</button>
     </div>
 </li>
