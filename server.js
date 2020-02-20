@@ -4,7 +4,7 @@ var path = require("path");
 var app = express();
 var PORT = process.env.PORT || 8080;
 
-// Requiring our Todo model
+// Requiring our Burger model
 var db = require("./models");
 
 // Serve static content for the app from the "public" directory in the application directory.
